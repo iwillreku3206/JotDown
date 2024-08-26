@@ -163,13 +163,16 @@ impl BlockRule for FootnoteDefinitionScanner {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::{
+        plugins::{cmark, pandoc::footnote::{definitions::FootnoteDefinition, *}, sourcepos},
+        MarkdownIt,
+    };
 
     #[test]
     fn it_works() {
-        let parser = &mut markdown_it::MarkdownIt::new();
-        markdown_it::plugins::cmark::add(parser);
-        markdown_it::plugins::sourcepos::add(parser);
+        let parser = &mut MarkdownIt::new();
+        cmark::add(parser);
+        sourcepos::add(parser);
         add(parser);
         let node = parser.parse("[^note]: a\n\nhallo\nthere\n");
         // println!("{:#?}", node);

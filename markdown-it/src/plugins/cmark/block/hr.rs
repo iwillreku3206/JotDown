@@ -15,7 +15,7 @@ pub struct ThematicBreak {
 }
 
 impl NodeValue for ThematicBreak {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>) {
         fmt.cr();
         fmt.self_close("hr", &node.attrs);
         fmt.cr();

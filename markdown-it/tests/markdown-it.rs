@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 
 fn run(input: &str, output: &str) {
     let output = if output.is_empty() { "".to_owned() } else { output.to_owned() + "\n" };
@@ -11,7 +13,7 @@ fn run(input: &str, output: &str) {
     // make sure we have sourcemaps for everything
     node.walk(|node, _| assert!(node.srcmap.is_some()));
 
-    let result = node.render();
+    let result = node.render(&HashMap::new());
     assert_eq!(result, output);
 
     // make sure it doesn't crash without trailing \n

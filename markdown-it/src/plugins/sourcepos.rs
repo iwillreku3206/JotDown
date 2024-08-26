@@ -38,6 +38,8 @@ impl CoreRule for SyntaxPosRule {
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashMap;
+
     #[test]
     fn header_test() {
         // same as doctest, keep in sync!
@@ -46,7 +48,7 @@ mod tests {
         crate::plugins::cmark::add(md);
         crate::plugins::sourcepos::add(md);
 
-        let html = md.parse("# hello").render();
+        let html = md.parse("# hello").render(&HashMap::new());
         assert_eq!(html.trim(), r#"<h1 data-sourcepos="1:1-1:7">hello</h1>"#);
     }
 }

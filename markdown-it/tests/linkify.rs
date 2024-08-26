@@ -1,6 +1,12 @@
 #![cfg(feature = "linkify")]
+
+use std::collections::HashMap;
 fn run(input: &str, output: &str) {
-    let output = if output.is_empty() { "".to_owned() } else { output.to_owned() + "\n" };
+    let output = if output.is_empty() {
+        "".to_owned()
+    } else {
+        output.to_owned() + "\n"
+    };
     let md = &mut markdown_it::MarkdownIt::new();
     markdown_it::plugins::cmark::add(md);
     markdown_it::plugins::html::add(md);
@@ -10,7 +16,7 @@ fn run(input: &str, output: &str) {
     // make sure we have sourcemaps for everything
     node.walk(|node, _| assert!(node.srcmap.is_some()));
 
-    let result = node.render();
+    let result = node.render(&HashMap::new());
     assert_eq!(result, output);
 
     // make sure it doesn't crash without trailing \n
@@ -55,7 +61,8 @@ fn entities_inside_raw_links() {
 #[test]
 fn emphasis_inside_raw_links_asterisk_can_happen_in_links_with_params() {
     let input = r#"https://example.com/foo*bar*baz"#;
-    let output = r#"<p><a href="https://example.com/foo*bar*baz">https://example.com/foo*bar*baz</a></p>"#;
+    let output =
+        r#"<p><a href="https://example.com/foo*bar*baz">https://example.com/foo*bar*baz</a></p>"#;
     run(input, output);
 }
 
@@ -167,4 +174,3 @@ fn emphasis_with_real_link_1() {
     let output = r#"<p><a href="https://www.sell.fi/sites/default/files/elainlaakarilehti/tieteelliset_artikkelit/kahkonen_t._et_al.canine_pancreatitis-_review.pdf">https://www.sell.fi/sites/default/files/elainlaakarilehti/tieteelliset_artikkelit/kahkonen_t._et_al.canine_pancreatitis-_review.pdf</a></p>"#;
     run(input, output);
 }
-

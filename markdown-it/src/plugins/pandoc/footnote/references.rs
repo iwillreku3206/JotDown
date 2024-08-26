@@ -39,7 +39,7 @@ pub struct FootnoteReference {
 }
 
 impl NodeValue for FootnoteReference {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>) {
         let mut attrs = node.attrs.clone();
         attrs.push(("class", "footnote-ref".into()));
 

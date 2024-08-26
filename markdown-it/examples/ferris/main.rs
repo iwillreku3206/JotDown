@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 // Adds three custom plugins and runs them.
 mod block_rule;
 mod core_rule;
@@ -19,7 +21,7 @@ fn main() {
     let html = md.parse(r#"
 (\/) hello world (\/)
 (\/)-------------(\/)
-    "#).render();
+    "#).render(&HashMap::new());
 
     print!("{html}");
 

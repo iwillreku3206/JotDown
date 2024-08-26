@@ -1,5 +1,6 @@
-use once_cell::sync::Lazy;
+use std::collections::HashMap;
 
+use once_cell::sync::Lazy;
 
 #[test]
 fn title_example() {
@@ -7,21 +8,21 @@ fn title_example() {
     markdown_it::plugins::cmark::add(parser);
 
     let ast = parser.parse("Hello **world**!");
-    let html = ast.render();
+    let html = ast.render(&HashMap::new());
 
     assert_eq!(html, "<p>Hello <strong>world</strong>!</p>\n");
 }
 
 #[test]
 fn lazy_singleton() {
-    static MD : Lazy<markdown_it::MarkdownIt> = Lazy::new(|| {
+    static MD: Lazy<markdown_it::MarkdownIt> = Lazy::new(|| {
         let mut parser = markdown_it::MarkdownIt::new();
         markdown_it::plugins::cmark::add(&mut parser);
         parser
     });
 
     let ast = MD.parse("Hello **world**!");
-    let html = ast.render();
+    let html = ast.render(&HashMap::new());
 
     assert_eq!(html, "<p>Hello <strong>world</strong>!</p>\n");
 }
@@ -30,7 +31,7 @@ fn lazy_singleton() {
 fn no_plugins() {
     let md = &mut markdown_it::MarkdownIt::new();
     let node = md.parse("hello\nworld");
-    let result = node.render();
+    let result = node.render(&HashMap::new());
     assert_eq!(result, "hello\nworld\n");
 }
 
@@ -41,10 +42,9 @@ fn no_max_indent() {
     markdown_it::plugins::cmark::block::list::add(md);
     md.max_indent = i32::MAX;
     let node = md.parse("        paragraph\n      - item");
-    let result = node.render();
+    let result = node.render(&HashMap::new());
     assert_eq!(result, "<p>paragraph</p>\n<ul>\n<li>item</li>\n</ul>\n");
 }
-
 
 /*#[test]
 fn no_block_parser() {
@@ -57,14 +57,18 @@ fn no_block_parser() {
 }*/
 
 fn run(input: &str, output: &str) {
-    let output = if output.is_empty() { "".to_owned() } else { output.to_owned() + "\n" };
+    let output = if output.is_empty() {
+        "".to_owned()
+    } else {
+        output.to_owned() + "\n"
+    };
     let md = &mut markdown_it::MarkdownIt::new();
     markdown_it::plugins::cmark::add(md);
     markdown_it::plugins::html::add(md);
     markdown_it::plugins::extra::beautify_links::add(md);
     let node = md.parse(&(input.to_owned() + "\n"));
     node.walk(|node, _| assert!(node.srcmap.is_some()));
-    let result = node.render();
+    let result = node.render(&HashMap::new());
     assert_eq!(result, output);
 }
 
@@ -85,8 +89,9 @@ mod markdown_it_rs_extras {
 
     #[test]
     fn tab_offset_in_lists() {
-        run("   > -\tfoo\n   >\n   >         foo\n",
-r#"<blockquote>
+        run(
+            "   > -\tfoo\n   >\n   >         foo\n",
+            r#"<blockquote>
 <ul>
 <li>
 <p>foo</p>
@@ -94,7 +99,8 @@ r#"<blockquote>
 </code></pre>
 </li>
 </ul>
-</blockquote>"#);
+</blockquote>"#,
+        );
     }
 
     #[test]
@@ -184,10 +190,7 @@ r#"<blockquote>
             }
         });
 
-        assert_eq!(
-            collected,
-            vec!["inline", "block", "core"],
-        );
+        assert_eq!(collected, vec!["inline", "block", "core"],);
     }
 }
 
@@ -199,4 +202,3 @@ mod examples {
         main();
     }
 }
-

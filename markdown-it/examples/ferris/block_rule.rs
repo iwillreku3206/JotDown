@@ -1,5 +1,7 @@
 // Replaces `(\/)-------(\/)` with a nice picture.
 
+use std::collections::HashMap;
+
 use markdown_it::parser::block::{BlockRule, BlockState};
 use markdown_it::{MarkdownIt, Node, NodeValue, Renderer};
 
@@ -11,7 +13,7 @@ const CRAB_URL  : &str = "https://upload.wikimedia.org/wikipedia/commons/0/0f/Or
 pub struct BlockFerris;
 
 impl NodeValue for BlockFerris {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>) {
         // build attributes for `div`
         let mut attrs_div = node.attrs.clone();
         attrs_div.push(("class", "ferris-block".into()));

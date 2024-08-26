@@ -40,7 +40,7 @@ pub struct FootnoteRefAnchor {
     pub ref_ids: Vec<usize>,
 }
 impl NodeValue for FootnoteRefAnchor {
-    fn render(&self, _: &Node, fmt: &mut dyn crate::Renderer, options: &HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn crate::Renderer, _options: &HashMap<String, String>) {
         for ref_id in self.ref_ids.iter() {
             fmt.text(" ");
             fmt.open(

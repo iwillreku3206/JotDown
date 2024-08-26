@@ -17,7 +17,7 @@ pub struct HtmlBlock {
 }
 
 impl NodeValue for HtmlBlock {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>) {
         fmt.cr();
         fmt.text_raw(&self.content);
         fmt.cr();

@@ -221,7 +221,7 @@ pub trait NodeValue: Debug + Downcast {
     /// }
     /// # };
     /// ```
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, parse_options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _parse_options: &HashMap<String, String>) {
         let _ = fmt;
         unimplemented!("{} doesn't implement render", node.name());
     }
