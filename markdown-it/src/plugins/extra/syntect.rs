@@ -45,7 +45,12 @@ impl CoreRule for SyntectRule {
     fn run(root: &mut Node, md: &MarkdownIt) {
         let ss = SyntaxSet::load_defaults_newlines();
         let ts = ThemeSet::load_defaults();
-        let theme = &ts.themes[md.ext.get::<SyntectSettings>().copied().unwrap_or_default().0];
+        let theme = &ts.themes[md
+            .ext
+            .get::<SyntectSettings>()
+            .copied()
+            .unwrap_or_default()
+            .0];
 
         root.walk_mut(|node, _| {
             let mut content = None;
@@ -61,6 +66,12 @@ impl CoreRule for SyntectRule {
             if let Some(content) = content {
                 let mut syntax = None;
                 if let Some(language) = language {
+                    if language == "mermaid" {
+                        let html = format!("<pre class=\"mermaid\">{}</pre>", content);
+                        (*node).replace(SyntectSnippet { html });
+                        return;
+                    }
+
                     syntax = ss.find_syntax_by_token(&language);
                 }
                 let syntax = syntax.unwrap_or_else(|| ss.find_syntax_plain_text());
