@@ -21,7 +21,7 @@ pub struct Linkified {
 }
 
 impl NodeValue for Linkified {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let mut attrs = node.attrs.clone();
         attrs.push(("href", self.url.clone()));
 

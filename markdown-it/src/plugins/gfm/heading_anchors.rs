@@ -112,7 +112,7 @@ impl NodeValue for HeadingAnchor {
         &self,
         node: &Node,
         fmt: &mut dyn crate::Renderer,
-        options: &HashMap<String, String>,
+        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
     ) {
         let mut attrs = node.attrs.clone();
         if let Some(id) = &self.id {

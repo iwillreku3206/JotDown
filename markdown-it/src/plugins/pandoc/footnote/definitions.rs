@@ -40,7 +40,7 @@ pub struct FootnoteDefinition {
 }
 
 impl NodeValue for FootnoteDefinition {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let mut attrs = node.attrs.clone();
         if let Some(def_id) = self.def_id {
             attrs.push(("id", format!("fn{}", def_id)));

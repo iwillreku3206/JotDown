@@ -16,7 +16,7 @@ pub struct CodeBlock {
 }
 
 impl NodeValue for CodeBlock {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("pre", &[]);
         fmt.open("code", &node.attrs);

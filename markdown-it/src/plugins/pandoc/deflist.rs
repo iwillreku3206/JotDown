@@ -40,7 +40,7 @@ pub fn add(md: &mut MarkdownIt) {
 #[derive(Debug)]
 pub struct DefinitionList;
 impl NodeValue for DefinitionList {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("dl", &node.attrs);
         fmt.cr();
@@ -54,7 +54,7 @@ impl NodeValue for DefinitionList {
 #[derive(Debug)]
 pub struct DefinitionTerm;
 impl NodeValue for DefinitionTerm {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("dt", &node.attrs);
         fmt.contents(&node.children, options);
@@ -66,7 +66,7 @@ impl NodeValue for DefinitionTerm {
 #[derive(Debug)]
 pub struct DefinitionDescription;
 impl NodeValue for DefinitionDescription {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("dd", &node.attrs);
         fmt.contents(&node.children, options);

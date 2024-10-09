@@ -21,7 +21,7 @@ pub struct OrderedList {
 }
 
 impl NodeValue for OrderedList {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let mut attrs = node.attrs.clone();
         let start;
         if self.start != 1 {
@@ -44,7 +44,7 @@ pub struct BulletList {
 }
 
 impl NodeValue for BulletList {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("ul", &node.attrs);
         fmt.cr();
@@ -59,7 +59,7 @@ impl NodeValue for BulletList {
 pub struct ListItem;
 
 impl NodeValue for ListItem {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.open("li", &node.attrs);
         fmt.contents(&node.children, options);
         fmt.close("li");

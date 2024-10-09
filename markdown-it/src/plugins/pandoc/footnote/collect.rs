@@ -50,7 +50,7 @@ impl NodeValue for FootnotesContainerNode {
         &self,
         node: &Node,
         fmt: &mut dyn crate::Renderer,
-        options: &HashMap<String, String>,
+        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
     ) {
         let mut attrs = node.attrs.clone();
         attrs.push(("class", "footnotes".into()));

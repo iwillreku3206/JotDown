@@ -17,7 +17,7 @@ pub struct Table {
 }
 
 impl NodeValue for Table {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let old_context = fmt.ext().remove::<TableRenderContext>();
         fmt.ext().insert(TableRenderContext {
             head: false,
@@ -50,7 +50,7 @@ impl RenderExt for TableRenderContext {}
 pub struct TableHead;
 
 impl NodeValue for TableHead {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let ctx = fmt.ext().get_or_insert_default::<TableRenderContext>();
         ctx.head = true;
 
@@ -71,7 +71,7 @@ impl NodeValue for TableHead {
 pub struct TableBody;
 
 impl NodeValue for TableBody {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("tbody", &node.attrs);
         fmt.cr();
@@ -86,7 +86,7 @@ impl NodeValue for TableBody {
 pub struct TableRow;
 
 impl NodeValue for TableRow {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let ctx = fmt.ext().get_or_insert_default::<TableRenderContext>();
         ctx.index = 0;
 
@@ -104,7 +104,7 @@ impl NodeValue for TableRow {
 pub struct TableCell;
 
 impl NodeValue for TableCell {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         let ctx = fmt.ext().get_or_insert_default::<TableRenderContext>();
         let tag = if ctx.head { "th" } else { "td" };
 

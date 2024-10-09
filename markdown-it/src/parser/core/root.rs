@@ -17,7 +17,7 @@ impl Root {
 }
 
 impl NodeValue for Root {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.contents(&node.children, options);
     }
 }

@@ -15,7 +15,7 @@ pub struct ATXHeading {
 }
 
 impl NodeValue for ATXHeading {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         static TAG: [&str; 6] = ["h1", "h2", "h3", "h4", "h5", "h6"];
         debug_assert!(self.level >= 1 && self.level <= 6);
 

@@ -17,8 +17,7 @@ impl NodeValue for Blockquote {
         &self,
         node: &Node,
         fmt: &mut dyn Renderer,
-        options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
     ) {
         fmt.cr();
         fmt.open("blockquote", &node.attrs);

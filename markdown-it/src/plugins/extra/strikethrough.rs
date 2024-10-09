@@ -10,7 +10,7 @@ pub struct Strikethrough {
 }
 
 impl NodeValue for Strikethrough {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.open("s", &node.attrs);
         fmt.contents(&node.children, options);
         fmt.close("s");
