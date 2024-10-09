@@ -5,6 +5,7 @@ use syntect::highlighting::ThemeSet;
 use syntect::html::highlighted_html_for_string;
 use syntect::parsing::SyntaxSet;
 
+use crate::common::utils::escape_html;
 use crate::parser::core::CoreRule;
 use crate::parser::extset::MarkdownItExt;
 use crate::plugins::cmark::block::code::CodeBlock;
@@ -67,7 +68,8 @@ impl CoreRule for SyntectRule {
                 let mut syntax = None;
                 if let Some(language) = language {
                     if language == "mermaid" {
-                        let html = format!("<pre class=\"mermaid\">{}</pre>", content);
+                        let html = format!("<pre class=\"mermaid\">{}</pre>", 
+                            escape_html(content));
                         (*node).replace(SyntectSnippet { html });
                         return;
                     }

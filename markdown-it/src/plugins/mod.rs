@@ -20,3 +20,4 @@ pub mod html;
 pub mod sourcepos;
 pub mod gfm;
 pub mod pandoc;
+pub mod jotdown;

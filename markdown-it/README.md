@@ -1,4 +1,4 @@
-# SuperMarkdown Parser 
+# JotDown Parser 
 
 Based on ![markdown-it](https://gitthub.com/markdown-it-rust/markdown-it)
 

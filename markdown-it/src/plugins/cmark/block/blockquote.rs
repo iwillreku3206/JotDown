@@ -13,7 +13,13 @@ use crate::{MarkdownIt, Node, NodeValue, Renderer};
 pub struct Blockquote;
 
 impl NodeValue for Blockquote {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut HashMap<String, String>,
+    ) {
         fmt.cr();
         fmt.open("blockquote", &node.attrs);
         fmt.cr();

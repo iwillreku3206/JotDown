@@ -8,5 +8,20 @@ fn main() {
     markdown_it::plugins::sourcepos::add(&mut parser);
     markdown_it::plugins::gfm::add(&mut parser);
     markdown_it::plugins::pandoc::add(&mut parser);
-    println!("{}", parser.parse("# Test 1").render(&HashMap::new()));
+    println!(
+        "{}",
+        parser
+            .parse(
+                r#"
+# Test
+
+```mermaid
+<script>alert(window.location)</script>
+flowchart TD
+    a-->b
+````
+        "#
+            )
+            .render(&HashMap::new())
+    );
 }
