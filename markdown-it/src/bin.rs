@@ -111,7 +111,7 @@ fn main() {
         return;
     }
 
-    let result = ast.render(&HashMap::new());
+    let result = ast.render(&HashMap::new(), &mut HashMap::new());
 
     if output == "-" {
         std::io::stdout().write_all(result.as_bytes()).unwrap();

@@ -14,7 +14,7 @@ pub struct FerrisCounter(usize);
 
 // This defines how your custom node should be rendered.
 impl NodeValue for FerrisCounter {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
         // `node.attrs` are custom attributes added by other plugins
         // (for example, source mapping information)
         let mut attrs = node.attrs.clone();

@@ -17,7 +17,7 @@ fn run(input: &str, output: &str) {
     // make sure we have sourcemaps for everything
     node.walk(|node, _| assert!(node.srcmap.is_some()));
 
-    let result = node.render(&HashMap::new());
+    let result = node.render(&HashMap::new(), &mut HashMap::new());
     assert_eq!(result, output);
 
     // make sure it doesn't crash without trailing \n

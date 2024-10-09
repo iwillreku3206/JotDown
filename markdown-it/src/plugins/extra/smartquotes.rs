@@ -541,7 +541,7 @@ mod tests {
         let md = &mut crate::MarkdownIt::new();
         crate::plugins::cmark::add(md);
         crate::plugins::extra::smartquotes::add(md);
-        let html = md.parse(r#"'hello' "world""#).render(&HashMap::new());
+        let html = md.parse(r#"'hello' "world""#).render(&HashMap::new(), &mut HashMap::new());
         assert_eq!(html.trim(), r#"<p>‘hello’ “world”</p>"#);
     }
 
@@ -551,7 +551,7 @@ mod tests {
         crate::plugins::cmark::add(md);
         crate::plugins::html::html_inline::add(md);
         crate::plugins::extra::smartquotes::add(md);
-        let html = md.parse(r#"<a href="hello"></a>"#).render(&HashMap::new());
+        let html = md.parse(r#"<a href="hello"></a>"#).render(&HashMap::new(), &mut HashMap::new());
         assert_eq!(html.trim(), r#"<p><a href="hello"></a></p>"#);
     }
 
@@ -563,7 +563,7 @@ mod tests {
         crate::plugins::html::html_inline::add(md);
         crate::plugins::extra::typographer::add(md);
         crate::plugins::extra::smartquotes::add(md);
-        let html = md.parse("\"**...**\"").render(&HashMap::new());
+        let html = md.parse("\"**...**\"").render(&HashMap::new(), &mut HashMap::new());
         assert_eq!(html.trim(), "<p>“<strong>…</strong>”</p>");
     }
 }

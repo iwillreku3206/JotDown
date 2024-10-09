@@ -21,7 +21,7 @@ fn main() {
     let html = md.parse(r#"
 (\/) hello world (\/)
 (\/)-------------(\/)
-    "#).render(&HashMap::new());
+    "#).render(&HashMap::new(), &mut HashMap::new());
 
     print!("{html}");
 

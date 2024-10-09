@@ -8,7 +8,7 @@ fn title_example() {
     markdown_it::plugins::cmark::add(parser);
 
     let ast = parser.parse("Hello **world**!");
-    let html = ast.render(&HashMap::new());
+    let html = ast.render(&HashMap::new(), &mut HashMap::new());
 
     assert_eq!(html, "<p>Hello <strong>world</strong>!</p>\n");
 }
@@ -22,7 +22,7 @@ fn lazy_singleton() {
     });
 
     let ast = MD.parse("Hello **world**!");
-    let html = ast.render(&HashMap::new());
+    let html = ast.render(&HashMap::new(), &mut HashMap::new());
 
     assert_eq!(html, "<p>Hello <strong>world</strong>!</p>\n");
 }
@@ -31,7 +31,7 @@ fn lazy_singleton() {
 fn no_plugins() {
     let md = &mut markdown_it::MarkdownIt::new();
     let node = md.parse("hello\nworld");
-    let result = node.render(&HashMap::new());
+    let result = node.render(&HashMap::new(), &mut HashMap::new());
     assert_eq!(result, "hello\nworld\n");
 }
 
@@ -42,7 +42,7 @@ fn no_max_indent() {
     markdown_it::plugins::cmark::block::list::add(md);
     md.max_indent = i32::MAX;
     let node = md.parse("        paragraph\n      - item");
-    let result = node.render(&HashMap::new());
+    let result = node.render(&HashMap::new(), &mut HashMap::new());
     assert_eq!(result, "<p>paragraph</p>\n<ul>\n<li>item</li>\n</ul>\n");
 }
 
@@ -68,7 +68,7 @@ fn run(input: &str, output: &str) {
     markdown_it::plugins::extra::beautify_links::add(md);
     let node = md.parse(&(input.to_owned() + "\n"));
     node.walk(|node, _| assert!(node.srcmap.is_some()));
-    let result = node.render(&HashMap::new());
+    let result = node.render(&HashMap::new(), &mut HashMap::new());
     assert_eq!(result, output);
 }
 

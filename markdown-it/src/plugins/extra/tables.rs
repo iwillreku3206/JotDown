@@ -501,13 +501,13 @@ mod tests {
     fn require_pipe_or_colon_in_align_row() {
         let md = &mut crate::MarkdownIt::new();
         crate::plugins::extra::tables::add(md);
-        let html = md.parse("foo\n---\nbar").render(&HashMap::new());
+        let html = md.parse("foo\n---\nbar").render(&HashMap::new(), &mut HashMap::new());
         assert_eq!(html.trim(), "foo\n---\nbar");
-        let html = md.parse("|foo\n---\nbar").render(&HashMap::new());
+        let html = md.parse("|foo\n---\nbar").render(&HashMap::new(), &mut HashMap::new());
         assert_eq!(html.trim(), "|foo\n---\nbar");
-        let html = md.parse("foo\n|---\nbar").render(&HashMap::new());
+        let html = md.parse("foo\n|---\nbar").render(&HashMap::new(), &mut HashMap::new());
         assert!(html.trim().starts_with("<table"));
-        let html = md.parse("foo\n:---\nbar").render(&HashMap::new());
+        let html = md.parse("foo\n:---\nbar").render(&HashMap::new(), &mut HashMap::new());
         assert!(html.trim().starts_with("<table"));
     }
 }

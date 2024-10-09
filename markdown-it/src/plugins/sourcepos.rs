@@ -48,7 +48,7 @@ mod tests {
         crate::plugins::cmark::add(md);
         crate::plugins::sourcepos::add(md);
 
-        let html = md.parse("# hello").render(&HashMap::new());
+        let html = md.parse("# hello").render(&HashMap::new(), &mut HashMap::new());
         assert_eq!(html.trim(), r#"<h1 data-sourcepos="1:1-1:7">hello</h1>"#);
     }
 }
