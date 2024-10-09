@@ -17,7 +17,7 @@ pub struct CodeInline {
 impl NodeValue for CodeInline {
     fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.open("code", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("code");
     }
 }

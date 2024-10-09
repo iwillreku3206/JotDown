@@ -208,7 +208,7 @@ pub struct Definition {
     pub title: Option<String>,
 }
 impl NodeValue for Definition {
-    fn render(&self, _: &Node, _: &mut dyn crate::Renderer, _: &HashMap<String, String>, cache: &mut HashMap<String, String>) {}
+    fn render(&self, _: &Node, _: &mut dyn crate::Renderer, _: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {}
 }
 
 #[doc(hidden)]

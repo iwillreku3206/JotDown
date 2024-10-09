@@ -120,7 +120,7 @@ impl NodeValue for HeadingAnchor {
         }
         attrs.push(("href", format!("#{}", self.href)));
         fmt.open("a", &attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("a");
     }
 }

@@ -20,7 +20,7 @@ pub struct CodeFence {
 }
 
 impl NodeValue for CodeFence {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
         let info = unescape_all(&self.info);
         let mut split = info.split_whitespace();
         let lang_name = split.next().unwrap_or("");

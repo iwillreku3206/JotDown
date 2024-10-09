@@ -31,7 +31,7 @@ impl NodeValue for OrderedList {
         fmt.cr();
         fmt.open("ol", &attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("ol");
         fmt.cr();
@@ -48,7 +48,7 @@ impl NodeValue for BulletList {
         fmt.cr();
         fmt.open("ul", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("ul");
         fmt.cr();
@@ -61,7 +61,7 @@ pub struct ListItem;
 impl NodeValue for ListItem {
     fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.open("li", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("li");
         fmt.cr();
     }

@@ -21,7 +21,7 @@ impl NodeValue for ATXHeading {
 
         fmt.cr();
         fmt.open(TAG[self.level as usize - 1], &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close(TAG[self.level as usize - 1]);
         fmt.cr();
     }

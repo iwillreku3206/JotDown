@@ -20,7 +20,7 @@ impl NodeValue for Paragraph {
     fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.cr();
         fmt.open("p", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("p");
         fmt.cr();
     }

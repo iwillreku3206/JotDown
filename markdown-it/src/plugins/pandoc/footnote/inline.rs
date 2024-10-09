@@ -43,7 +43,7 @@ impl NodeValue for InlineFootnote {
         options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
     ) {
         // simply pass-through to children
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
     }
 }
 

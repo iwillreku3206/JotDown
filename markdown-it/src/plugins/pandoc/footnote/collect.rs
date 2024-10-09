@@ -61,7 +61,7 @@ impl NodeValue for FootnotesContainerNode {
         fmt.cr();
         fmt.open("ol", &[("class", "footnotes-list".into())]);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("ol");
         fmt.cr();

@@ -13,7 +13,7 @@ pub struct HtmlInline {
 }
 
 impl NodeValue for HtmlInline {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
         fmt.text_raw(&self.content);
     }
 }

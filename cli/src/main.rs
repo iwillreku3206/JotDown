@@ -22,6 +22,6 @@ flowchart TD
 ````
         "#
             )
-            .render(&HashMap::new())
+            .render(&HashMap::new(), &mut HashMap::new())
     );
 }

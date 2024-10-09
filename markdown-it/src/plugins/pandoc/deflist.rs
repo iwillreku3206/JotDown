@@ -40,11 +40,17 @@ pub fn add(md: &mut MarkdownIt) {
 #[derive(Debug)]
 pub struct DefinitionList;
 impl NodeValue for DefinitionList {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut HashMap<String, String>,
+    ) {
         fmt.cr();
         fmt.open("dl", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("dl");
         fmt.cr();
@@ -54,10 +60,16 @@ impl NodeValue for DefinitionList {
 #[derive(Debug)]
 pub struct DefinitionTerm;
 impl NodeValue for DefinitionTerm {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut HashMap<String, String>,
+    ) {
         fmt.cr();
         fmt.open("dt", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("dt");
         fmt.cr();
     }
@@ -66,10 +78,16 @@ impl NodeValue for DefinitionTerm {
 #[derive(Debug)]
 pub struct DefinitionDescription;
 impl NodeValue for DefinitionDescription {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut HashMap<String, String>,
+    ) {
         fmt.cr();
         fmt.open("dd", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("dd");
         fmt.cr();
     }
@@ -311,7 +329,7 @@ mod tests {
         println!("test\n  : foo\n      : bar\n");
         let ast = md.parse("test\n  : foo\n     : bar\n");
         // println!("{:?}", ast);
-        println!("{}", ast.render(&HashMap::new()));
+        println!("{}", ast.render(&HashMap::new(), &mut HashMap::new()));
         // panic!("TODO")
     }
 }

@@ -16,7 +16,7 @@ pub struct Em {
 impl NodeValue for Em {
     fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.open("em", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("em");
     }
 }
@@ -29,7 +29,7 @@ pub struct Strong {
 impl NodeValue for Strong {
     fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
         fmt.open("strong", &node.attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("strong");
     }
 }

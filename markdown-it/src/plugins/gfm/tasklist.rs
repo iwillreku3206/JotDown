@@ -59,7 +59,7 @@ pub struct TodoCheckbox {
 }
 
 impl NodeValue for TodoCheckbox {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
         let mut attrs = node.attrs.clone();
         attrs.push(("class", "task-list-item-checkbox".into()));
         attrs.push(("type", "checkbox".into()));

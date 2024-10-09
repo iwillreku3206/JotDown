@@ -28,7 +28,7 @@ impl NodeValue for Table {
         fmt.cr();
         fmt.open("table", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("table");
         fmt.cr();
@@ -57,7 +57,7 @@ impl NodeValue for TableHead {
         fmt.cr();
         fmt.open("thead", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("thead");
         fmt.cr();
@@ -75,7 +75,7 @@ impl NodeValue for TableBody {
         fmt.cr();
         fmt.open("tbody", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("tbody");
         fmt.cr();
@@ -93,7 +93,7 @@ impl NodeValue for TableRow {
         fmt.cr();
         fmt.open("tr", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("tr");
         fmt.cr();
@@ -120,7 +120,7 @@ impl NodeValue for TableCell {
         ctx.index += 1;
 
         fmt.open(tag, &attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close(tag);
         fmt.cr();
     }

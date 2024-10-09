@@ -84,18 +84,26 @@ impl Node {
     }
 
     /// Render this node to HTML.
-    pub fn render(&self, options: &HashMap<String, String>) -> String {
+    pub fn render(
+        &self,
+        options: &HashMap<String, String>,
+        cache: &mut HashMap<String, String>,
+    ) -> String {
         let mut fmt = HTMLRenderer::<false>::new();
-        fmt.render(self, options);
+        fmt.render(self, options, cache);
         fmt.into()
     }
 
     /// Render this node to XHTML, it adds slash to self-closing tags like this: `<img />`.
     ///
     /// This mode exists for compatibility with CommonMark tests.
-    pub fn xrender(&self, options: &HashMap<String, String>) -> String {
+    pub fn xrender(
+        &self,
+        options: &HashMap<String, String>,
+        cache: &mut HashMap<String, String>,
+    ) -> String {
         let mut fmt = HTMLRenderer::<true>::new();
-        fmt.render(self, options);
+        fmt.render(self, options, cache);
         fmt.into()
     }
 

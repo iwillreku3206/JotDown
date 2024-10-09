@@ -22,7 +22,7 @@ impl NodeValue for Blockquote {
         fmt.cr();
         fmt.open("blockquote", &node.attrs);
         fmt.cr();
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.cr();
         fmt.close("blockquote");
         fmt.cr();

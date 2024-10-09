@@ -26,7 +26,7 @@ impl NodeValue for Linkified {
         attrs.push(("href", self.url.clone()));
 
         fmt.open("a", &attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("a");
     }
 }

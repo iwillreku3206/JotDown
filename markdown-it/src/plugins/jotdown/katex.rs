@@ -8,4 +8,4 @@ pub struct KatexBlockScanner;
 
 
 
-pub fn add(md: &mut MarkdownIt) {}
+pub fn add(_md: &mut MarkdownIt) {}

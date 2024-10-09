@@ -24,7 +24,7 @@ impl NodeValue for Link {
         }
 
         fmt.open("a", &attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("a");
     }
 }

@@ -49,7 +49,7 @@ impl NodeValue for FootnoteDefinition {
 
         fmt.cr();
         fmt.open("li", &attrs);
-        fmt.contents(&node.children, options);
+        fmt.contents(&node.children, options, cache);
         fmt.close("li");
         fmt.cr();
     }
