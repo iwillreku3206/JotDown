@@ -1,3 +1,4 @@
+use markdown_it::parser::cache::Cache;
 use std::collections::HashMap;
 
 fn main() {
@@ -22,6 +23,6 @@ flowchart TD
 ````
         "#
             )
-            .render(&HashMap::new(), &mut HashMap::new())
+            .render(&HashMap::new(), &mut Cache::new())
     );
 }

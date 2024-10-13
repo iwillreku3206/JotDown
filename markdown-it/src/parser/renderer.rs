@@ -4,6 +4,7 @@ use std::fmt::Debug;
 use crate::common::utils::escape_html;
 use crate::parser::extset::RenderExtSet;
 use crate::Node;
+use crate::parser::cache::Cache;
 
 /// Each node outputs its HTML using this API.
 ///

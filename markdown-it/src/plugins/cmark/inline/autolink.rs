@@ -10,6 +10,7 @@ use regex::Regex;
 
 use crate::parser::inline::{InlineRule, InlineState, TextSpecial};
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
+use crate::parser::cache::Cache;
 
 #[derive(Debug)]
 pub struct Autolink {

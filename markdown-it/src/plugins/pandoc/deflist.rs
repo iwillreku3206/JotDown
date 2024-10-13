@@ -330,7 +330,7 @@ mod tests {
         println!("test\n  : foo\n      : bar\n");
         let ast = md.parse("test\n  : foo\n     : bar\n");
         // println!("{:?}", ast);
-        println!("{}", ast.render(&HashMap::new(), &mut HashMap::new()));
+        println!("{}", ast.render(&HashMap::new(), &mut Cache::new()));
         // panic!("TODO")
     }
 }

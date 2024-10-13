@@ -5,6 +5,7 @@ use std::collections::HashMap;
 
 use regex::{self, Regex};
 
+use crate::parser::cache::Cache;
 use crate::parser::inline::{InlineRule, InlineState};
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 

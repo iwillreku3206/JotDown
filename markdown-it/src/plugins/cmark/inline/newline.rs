@@ -7,6 +7,7 @@
 use std::collections::HashMap;
 
 use crate::parser::inline::{InlineRule, InlineState};
+use crate::parser::cache::Cache;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
 #[derive(Debug)]

@@ -5,6 +5,7 @@ use syntect::highlighting::ThemeSet;
 use syntect::html::highlighted_html_for_string;
 use syntect::parsing::SyntaxSet;
 
+use crate::parser::cache::Cache;
 use crate::common::utils::escape_html;
 use crate::parser::core::CoreRule;
 use crate::parser::extset::MarkdownItExt;

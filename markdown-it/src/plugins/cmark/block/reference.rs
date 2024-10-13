@@ -13,6 +13,7 @@ use downcast_rs::{impl_downcast, Downcast};
 use std::collections::HashMap;
 use std::fmt::Debug;
 
+use crate::parser::cache::Cache;
 use crate::common::utils::normalize_reference;
 use crate::generics::inline::full_link;
 use crate::parser::block::{BlockRule, BlockState};

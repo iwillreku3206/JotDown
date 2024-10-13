@@ -5,6 +5,7 @@ use std::collections::HashMap;
 use super::block_rule::BlockFerris;
 use super::inline_rule::InlineFerris;
 use markdown_it::parser::core::CoreRule;
+use markdown_it::parser::cache::Cache;
 use markdown_it::{MarkdownIt, Node, NodeValue, Renderer};
 
 #[derive(Debug)]
@@ -14,7 +15,7 @@ pub struct FerrisCounter(usize);
 
 // This defines how your custom node should be rendered.
 impl NodeValue for FerrisCounter {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         // `node.attrs` are custom attributes added by other plugins
         // (for example, source mapping information)
         let mut attrs = node.attrs.clone();

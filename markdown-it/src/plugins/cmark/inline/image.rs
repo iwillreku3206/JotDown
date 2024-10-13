@@ -6,6 +6,7 @@
 use std::collections::HashMap;
 
 use crate::generics::inline::full_link;
+use crate::parser::cache::Cache;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
 #[derive(Debug)]

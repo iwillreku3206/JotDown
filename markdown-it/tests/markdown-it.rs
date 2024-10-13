@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use markdown_it::parser::cache::Cache;
 
 
 fn run(input: &str, output: &str) {
@@ -13,7 +14,7 @@ fn run(input: &str, output: &str) {
     // make sure we have sourcemaps for everything
     node.walk(|node, _| assert!(node.srcmap.is_some()));
 
-    let result = node.render(&HashMap::new(), &mut HashMap::new());
+    let result = node.render(&HashMap::new(), &mut Cache::new());
     assert_eq!(result, output);
 
     // make sure it doesn't crash without trailing \n

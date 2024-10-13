@@ -7,6 +7,7 @@ use std::collections::HashMap;
 
 use crate::generics::inline::emph_pair;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
+use crate::parser::cache::Cache;
 
 #[derive(Debug)]
 pub struct Em {

@@ -27,6 +27,7 @@
 use std::collections::HashMap;
 
 use crate::common::utils::is_punct_char;
+
 use crate::parser::core::CoreRule;
 use crate::parser::inline::Text;
 use crate::plugins::cmark::block::paragraph::Paragraph;
@@ -462,9 +463,7 @@ fn find_first_char_after(
                 content,
                 nesting_level: _,
             } => content,
-            FlatToken::HtmlInline {
-                content,
-            } => content,
+            FlatToken::HtmlInline { content } => content,
             FlatToken::Irrelevant => continue,
         };
         let start_index = if idx_t == token_index {
@@ -502,9 +501,7 @@ fn find_last_char_before(
                 content,
                 nesting_level: _,
             } => content,
-            FlatToken::HtmlInline {
-                content,
-            } => content,
+            FlatToken::HtmlInline { content } => content,
             FlatToken::Irrelevant => continue,
         };
 
@@ -531,17 +528,19 @@ fn find_last_char_before(
     SPACE
 }
 
-
 #[cfg(test)]
 mod tests {
     use std::collections::HashMap;
+use crate::parser::cache::Cache;
 
     #[test]
     fn smartquotes_basics() {
         let md = &mut crate::MarkdownIt::new();
         crate::plugins::cmark::add(md);
         crate::plugins::extra::smartquotes::add(md);
-        let html = md.parse(r#"'hello' "world""#).render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse(r#"'hello' "world""#)
+            .render(&HashMap::new(), &mut Cache::new());
         assert_eq!(html.trim(), r#"<p>‘hello’ “world”</p>"#);
     }
 
@@ -551,7 +550,9 @@ mod tests {
         crate::plugins::cmark::add(md);
         crate::plugins::html::html_inline::add(md);
         crate::plugins::extra::smartquotes::add(md);
-        let html = md.parse(r#"<a href="hello"></a>"#).render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse(r#"<a href="hello"></a>"#)
+            .render(&HashMap::new(), &mut Cache::new());
         assert_eq!(html.trim(), r#"<p><a href="hello"></a></p>"#);
     }
 
@@ -563,7 +564,9 @@ mod tests {
         crate::plugins::html::html_inline::add(md);
         crate::plugins::extra::typographer::add(md);
         crate::plugins::extra::smartquotes::add(md);
-        let html = md.parse("\"**...**\"").render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse("\"**...**\"")
+            .render(&HashMap::new(), &mut Cache::new());
         assert_eq!(html.trim(), "<p>“<strong>…</strong>”</p>");
     }
 }

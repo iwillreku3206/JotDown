@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use markdown_it::parser::cache::Cache;
 
 // Adds three custom plugins and runs them.
 mod block_rule;
@@ -21,7 +22,7 @@ fn main() {
     let html = md.parse(r#"
 (\/) hello world (\/)
 (\/)-------------(\/)
-    "#).render(&HashMap::new(), &mut HashMap::new());
+    "#).render(&HashMap::new(), &mut Cache::new());
 
     print!("{html}");
 

@@ -5,6 +5,7 @@ use std::collections::HashMap;
 
 use crate::common::sourcemap::SourcePos;
 use crate::parser::block::{BlockRule, BlockState};
+use crate::parser::cache::Cache;
 use crate::parser::extset::RenderExt;
 use crate::parser::inline::InlineRoot;
 use crate::plugins::cmark::block::heading::HeadingScanner;
@@ -17,7 +18,13 @@ pub struct Table {
 }
 
 impl NodeValue for Table {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         let old_context = fmt.ext().remove::<TableRenderContext>();
         fmt.ext().insert(TableRenderContext {
             head: false,
@@ -50,7 +57,13 @@ impl RenderExt for TableRenderContext {}
 pub struct TableHead;
 
 impl NodeValue for TableHead {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         let ctx = fmt.ext().get_or_insert_default::<TableRenderContext>();
         ctx.head = true;
 
@@ -71,7 +84,13 @@ impl NodeValue for TableHead {
 pub struct TableBody;
 
 impl NodeValue for TableBody {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         fmt.cr();
         fmt.open("tbody", &node.attrs);
         fmt.cr();
@@ -86,7 +105,13 @@ impl NodeValue for TableBody {
 pub struct TableRow;
 
 impl NodeValue for TableRow {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         let ctx = fmt.ext().get_or_insert_default::<TableRenderContext>();
         ctx.index = 0;
 
@@ -104,7 +129,13 @@ impl NodeValue for TableRow {
 pub struct TableCell;
 
 impl NodeValue for TableCell {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         let ctx = fmt.ext().get_or_insert_default::<TableRenderContext>();
         let tag = if ctx.head { "th" } else { "td" };
 
@@ -427,6 +458,7 @@ impl BlockRule for TableScanner {
 #[cfg(test)]
 mod tests {
     use std::collections::HashMap;
+use crate::parser::cache::Cache;
 
     use super::TableScanner;
 
@@ -501,13 +533,21 @@ mod tests {
     fn require_pipe_or_colon_in_align_row() {
         let md = &mut crate::MarkdownIt::new();
         crate::plugins::extra::tables::add(md);
-        let html = md.parse("foo\n---\nbar").render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse("foo\n---\nbar")
+            .render(&HashMap::new(), &mut Cache::new());
         assert_eq!(html.trim(), "foo\n---\nbar");
-        let html = md.parse("|foo\n---\nbar").render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse("|foo\n---\nbar")
+            .render(&HashMap::new(), &mut Cache::new());
         assert_eq!(html.trim(), "|foo\n---\nbar");
-        let html = md.parse("foo\n|---\nbar").render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse("foo\n|---\nbar")
+            .render(&HashMap::new(), &mut Cache::new());
         assert!(html.trim().starts_with("<table"));
-        let html = md.parse("foo\n:---\nbar").render(&HashMap::new(), &mut HashMap::new());
+        let html = md
+            .parse("foo\n:---\nbar")
+            .render(&HashMap::new(), &mut Cache::new());
         assert!(html.trim().starts_with("<table"));
     }
 }

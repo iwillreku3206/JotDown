@@ -4,6 +4,7 @@ use std::collections::HashMap;
 
 use markdown_it::parser::block::{BlockRule, BlockState};
 use markdown_it::{MarkdownIt, Node, NodeValue, Renderer};
+use markdown_it::parser::cache::Cache;
 
 const CRAB_CLAW : &str = r#"(\/)"#;
 const CRAB_URL  : &str = "https://upload.wikimedia.org/wikipedia/commons/0/0f/Original_Ferris.svg";
@@ -13,7 +14,7 @@ const CRAB_URL  : &str = "https://upload.wikimedia.org/wikipedia/commons/0/0f/Or
 pub struct BlockFerris;
 
 impl NodeValue for BlockFerris {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         // build attributes for `div`
         let mut attrs_div = node.attrs.clone();
         attrs_div.push(("class", "ferris-block".into()));

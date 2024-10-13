@@ -4,6 +4,7 @@ use std::collections::HashMap;
 
 use markdown_it::parser::inline::{InlineRule, InlineState};
 use markdown_it::{MarkdownIt, Node, NodeValue, Renderer};
+use markdown_it::parser::cache::Cache;
 
 const CRAB_CLAW: &str = r#"(\/)"#;
 
@@ -13,7 +14,7 @@ pub struct InlineFerris;
 
 // This defines how your custom node should be rendered.
 impl NodeValue for InlineFerris {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         // `node.attrs` are custom attributes added by other plugins
         // (for example, source mapping information)
         let mut attrs = node.attrs.clone();

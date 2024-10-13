@@ -10,6 +10,7 @@ use crate::common::utils::find_indent_of;
 use crate::parser::block::{BlockRule, BlockState};
 use crate::plugins::cmark::block::hr::HrScanner;
 use crate::plugins::cmark::block::paragraph::Paragraph;
+use crate::parser::cache::Cache;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
 use std::collections::HashMap;

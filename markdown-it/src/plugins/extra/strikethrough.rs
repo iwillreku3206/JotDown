@@ -1,6 +1,7 @@
 //! Strikethrough syntax (like `~~this~~`)
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::generics::inline::emph_pair;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
@@ -10,7 +11,13 @@ pub struct Strikethrough {
 }
 
 impl NodeValue for Strikethrough {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         fmt.open("s", &node.attrs);
         fmt.contents(&node.children, options, cache);
         fmt.close("s");

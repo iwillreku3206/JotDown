@@ -16,11 +16,6 @@ edition = "2021"
 name = "markdown_it"
 path = "src/lib.rs"
 
-[[bin]]
-name = "markdown-it"
-path = "src/bin.rs"
-doc = false
-
 [features]
 default = ["linkify", "syntect"]
 

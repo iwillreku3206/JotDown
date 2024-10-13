@@ -9,6 +9,7 @@ use crate::common::utils::unescape_all;
 use crate::parser::block::{BlockRule, BlockState};
 use crate::parser::extset::MarkdownItExt;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
+use crate::parser::cache::Cache;
 
 #[derive(Debug)]
 pub struct CodeFence {

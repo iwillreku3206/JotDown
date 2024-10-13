@@ -3,6 +3,7 @@
 //! `***`, `---`, `___`
 //!
 //! <https://spec.commonmark.org/0.30/#thematic-breaks>
+use crate::parser::cache::Cache;
 use crate::parser::block::{BlockRule, BlockState};
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 

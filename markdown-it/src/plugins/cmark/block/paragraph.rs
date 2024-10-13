@@ -7,6 +7,7 @@ use std::collections::HashMap;
 
 use crate::parser::block::{BlockRule, BlockState};
 use crate::parser::inline::InlineRoot;
+use crate::parser::cache::Cache;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
 pub fn add(md: &mut MarkdownIt) {

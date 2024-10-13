@@ -7,6 +7,7 @@ use std::collections::HashMap;
 
 use crate::parser::block::{BlockRule, BlockState};
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
+use crate::parser::cache::Cache;
 
 const CODE_INDENT: i32 = 4;
 

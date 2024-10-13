@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use crate::parser::extset::RootExtSet;
 use crate::{Node, NodeValue, Renderer};
+use crate::parser::cache::Cache;
 
 #[derive(Debug)]
 /// Root node of the AST.
