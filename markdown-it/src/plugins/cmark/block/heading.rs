@@ -4,6 +4,7 @@
 //!
 //! <https://spec.commonmark.org/0.30/#atx-heading>
 use crate::parser::block::{BlockRule, BlockState};
+use crate::parser::cache::Cache;
 use crate::parser::inline::InlineRoot;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
@@ -15,7 +16,13 @@ pub struct ATXHeading {
 }
 
 impl NodeValue for ATXHeading {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(
+        &self,
+        node: &Node,
+        fmt: &mut dyn Renderer,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
+    ) {
         static TAG: [&str; 6] = ["h1", "h2", "h3", "h4", "h5", "h6"];
         debug_assert!(self.level >= 1 && self.level <= 6);
 

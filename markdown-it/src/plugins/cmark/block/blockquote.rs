@@ -7,6 +7,7 @@ use std::collections::HashMap;
 
 use crate::common::utils::find_indent_of;
 use crate::parser::block::{BlockRule, BlockState};
+use crate::parser::cache::Cache;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
 #[derive(Debug)]
@@ -17,7 +18,8 @@ impl NodeValue for Blockquote {
         &self,
         node: &Node,
         fmt: &mut dyn Renderer,
-        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         fmt.cr();
         fmt.open("blockquote", &node.attrs);

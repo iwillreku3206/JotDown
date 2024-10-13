@@ -11,6 +11,8 @@ use crate::parser::renderer::HTMLRenderer;
 use crate::plugins::cmark::inline::newline::Softbreak;
 use crate::Renderer;
 
+use super::cache::Cache;
+
 /// Single node in the CommonMark AST.
 #[derive(Debug)]
 #[readonly::make]
@@ -234,7 +236,7 @@ pub trait NodeValue: Debug + Downcast {
         node: &Node,
         fmt: &mut dyn Renderer,
         parse_options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         let _ = fmt;
         let _ = parse_options;

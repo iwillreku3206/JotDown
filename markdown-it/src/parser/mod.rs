@@ -39,6 +39,7 @@ pub mod core;
 pub mod extset;
 pub mod inline;
 pub mod linkfmt;
+pub mod cache;
 
 pub(super) mod main;
 pub(super) mod node;
