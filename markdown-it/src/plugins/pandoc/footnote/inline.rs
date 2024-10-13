@@ -19,6 +19,7 @@
 //! ```
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::inline::{InlineRule, InlineState},
     MarkdownIt, Node, NodeValue,
@@ -40,7 +41,7 @@ impl NodeValue for InlineFootnote {
         &self,
         node: &Node,
         fmt: &mut dyn crate::Renderer,
-        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
+        options: &HashMap<String, String>, cache: &mut Cache,
     ) {
         // simply pass-through to children
         fmt.contents(&node.children, options, cache);

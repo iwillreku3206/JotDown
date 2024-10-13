@@ -17,6 +17,7 @@
 
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::parser::block::{BlockRule, BlockState};
 use crate::plugins::cmark::block::reference::ReferenceScanner;
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
@@ -40,7 +41,7 @@ pub struct FootnoteDefinition {
 }
 
 impl NodeValue for FootnoteDefinition {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
         let mut attrs = node.attrs.clone();
         if let Some(def_id) = self.def_id {
             attrs.push(("id", format!("fn{}", def_id)));

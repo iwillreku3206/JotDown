@@ -15,7 +15,7 @@ pub struct Image {
 }
 
 impl NodeValue for Image {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _option: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _option: &HashMap<String, String>, _cache: &mut Cache) {
         let mut attrs = node.attrs.clone();
         attrs.push(("src", self.url.clone()));
         attrs.push(("alt", node.collect_text()));

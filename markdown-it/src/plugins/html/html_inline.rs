@@ -4,6 +4,7 @@
 use std::collections::HashMap;
 
 use super::utils::regexps::*;
+use crate::parser::cache::Cache;
 use crate::parser::inline::{InlineRule, InlineState};
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
@@ -13,7 +14,7 @@ pub struct HtmlInline {
 }
 
 impl NodeValue for HtmlInline {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         fmt.text_raw(&self.content);
     }
 }

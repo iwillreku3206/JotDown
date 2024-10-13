@@ -25,7 +25,7 @@ impl NodeValue for Root {
         node: &Node,
         fmt: &mut dyn Renderer,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         fmt.contents(&node.children, options, cache);
     }

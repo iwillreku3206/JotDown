@@ -6,6 +6,7 @@ use regex::Regex;
 use std::cmp::Ordering;
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::parser::core::{CoreRule, Root};
 use crate::parser::extset::RootExt;
 use crate::parser::inline::builtin::InlineParserRule;
@@ -21,7 +22,7 @@ pub struct Linkified {
 }
 
 impl NodeValue for Linkified {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
         let mut attrs = node.attrs.clone();
         attrs.push(("href", self.url.clone()));
 

@@ -17,7 +17,7 @@ pub trait Renderer {
     /// Write self-closing html tag with attributes, e.g. `<img src="url"/>`.
     fn self_close(&mut self, tag: &str, attrs: &[(&str, String)]);
     /// Loop through child nodes and render each one.
-    fn contents(&mut self, nodes: &[Node], options: &HashMap<String, String>, cache: &mut HashMap<String, String>);
+    fn contents(&mut self, nodes: &[Node], options: &HashMap<String, String>, cache: &mut Cache);
     /// Write line break (`\n`). Default renderer ignores it if last char in the buffer is `\n` already.
     fn cr(&mut self);
     /// Write plain text with escaping, `<div>` -> `&lt;div&gt;`.
@@ -47,7 +47,7 @@ impl<const XHTML: bool> HTMLRenderer<XHTML> {
         &mut self,
         node: &Node,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         node.node_value.render(node, self, options, cache);
     }
@@ -137,7 +137,7 @@ impl<const XHTML: bool> Renderer for HTMLRenderer<XHTML> {
         &mut self,
         nodes: &[Node],
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         for node in nodes.iter() {
             self.render(node, options, cache);

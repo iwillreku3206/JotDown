@@ -17,7 +17,7 @@ pub struct SetextHeader {
 }
 
 impl NodeValue for SetextHeader {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
         static TAG: [&str; 2] = ["h1", "h2"];
         debug_assert!(self.level >= 1 && self.level <= 2);
 

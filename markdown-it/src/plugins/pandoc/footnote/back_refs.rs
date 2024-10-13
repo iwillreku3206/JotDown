@@ -22,6 +22,7 @@
 //! ```
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::core::{CoreRule, Root},
     plugins::cmark::block::paragraph::Paragraph,
@@ -40,7 +41,13 @@ pub struct FootnoteRefAnchor {
     pub ref_ids: Vec<usize>,
 }
 impl NodeValue for FootnoteRefAnchor {
-    fn render(&self, _: &Node, fmt: &mut dyn crate::Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(
+        &self,
+        _: &Node,
+        fmt: &mut dyn crate::Renderer,
+        _options: &HashMap<String, String>,
+        _cache: &mut Cache,
+    ) {
         for ref_id in self.ref_ids.iter() {
             fmt.text(" ");
             fmt.open(

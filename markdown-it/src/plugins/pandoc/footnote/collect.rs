@@ -26,6 +26,7 @@
 //! ```
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::core::{CoreRule, Root},
     plugins::cmark::block::paragraph::Paragraph,
@@ -50,7 +51,8 @@ impl NodeValue for FootnotesContainerNode {
         &self,
         node: &Node,
         fmt: &mut dyn crate::Renderer,
-        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
+        options: &HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         let mut attrs = node.attrs.clone();
         attrs.push(("class", "footnotes".into()));

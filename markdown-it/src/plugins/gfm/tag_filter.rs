@@ -8,6 +8,7 @@
 
 use regex::Regex;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::{core::CoreRule, inline::builtin::InlineParserRule},
     plugins::html::{html_block::HtmlBlock, html_inline::HtmlInline},

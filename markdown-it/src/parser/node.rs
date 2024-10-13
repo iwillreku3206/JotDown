@@ -89,7 +89,7 @@ impl Node {
     pub fn render(
         &self,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) -> String {
         let mut fmt = HTMLRenderer::<false>::new();
         fmt.render(self, options, cache);
@@ -102,7 +102,7 @@ impl Node {
     pub fn xrender(
         &self,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) -> String {
         let mut fmt = HTMLRenderer::<true>::new();
         fmt.render(self, options, cache);

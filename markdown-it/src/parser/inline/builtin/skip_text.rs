@@ -15,7 +15,7 @@ pub struct Text {
 }
 
 impl NodeValue for Text {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         fmt.text(&self.content);
     }
 }
@@ -29,7 +29,7 @@ pub struct TextSpecial {
 }
 
 impl NodeValue for TextSpecial {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         fmt.text(&self.content);
     }
 }

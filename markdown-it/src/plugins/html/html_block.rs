@@ -8,6 +8,7 @@ use regex::Regex;
 
 use super::utils::blocks::*;
 use super::utils::regexps::*;
+use crate::parser::cache::Cache;
 use crate::parser::block::{BlockRule, BlockState};
 use crate::{MarkdownIt, Node, NodeValue, Renderer};
 
@@ -17,7 +18,7 @@ pub struct HtmlBlock {
 }
 
 impl NodeValue for HtmlBlock {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         fmt.cr();
         fmt.text_raw(&self.content);
         fmt.cr();

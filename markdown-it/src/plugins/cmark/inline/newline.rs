@@ -13,7 +13,7 @@ use crate::{MarkdownIt, Node, NodeValue, Renderer};
 pub struct Hardbreak;
 
 impl NodeValue for Hardbreak {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         fmt.self_close("br", &[]);
         fmt.cr();
     }
@@ -23,7 +23,7 @@ impl NodeValue for Hardbreak {
 pub struct Softbreak;
 
 impl NodeValue for Softbreak {
-    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, _: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         fmt.cr();
     }
 }

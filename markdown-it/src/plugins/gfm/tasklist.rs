@@ -26,6 +26,7 @@
 
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::{
         core::CoreRule,
@@ -59,7 +60,7 @@ pub struct TodoCheckbox {
 }
 
 impl NodeValue for TodoCheckbox {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, _options: &HashMap<String, String>, _cache: &mut Cache) {
         let mut attrs = node.attrs.clone();
         attrs.push(("class", "task-list-item-checkbox".into()));
         attrs.push(("type", "checkbox".into()));

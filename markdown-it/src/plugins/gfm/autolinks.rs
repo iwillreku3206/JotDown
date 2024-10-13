@@ -19,6 +19,7 @@
 //! );
 //! ```
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::inline::{InlineRule, InlineState, TextSpecial},
     plugins::cmark::inline::autolink::Autolink,

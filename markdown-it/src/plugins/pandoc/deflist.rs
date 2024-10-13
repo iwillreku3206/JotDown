@@ -20,6 +20,7 @@
 
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::{
         block::{BlockRule, BlockState},
@@ -45,7 +46,7 @@ impl NodeValue for DefinitionList {
         node: &Node,
         fmt: &mut dyn Renderer,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         fmt.cr();
         fmt.open("dl", &node.attrs);
@@ -65,7 +66,7 @@ impl NodeValue for DefinitionTerm {
         node: &Node,
         fmt: &mut dyn Renderer,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         fmt.cr();
         fmt.open("dt", &node.attrs);
@@ -83,7 +84,7 @@ impl NodeValue for DefinitionDescription {
         node: &Node,
         fmt: &mut dyn Renderer,
         options: &HashMap<String, String>,
-        cache: &mut HashMap<String, String>,
+        cache: &mut Cache,
     ) {
         fmt.cr();
         fmt.open("dd", &node.attrs);

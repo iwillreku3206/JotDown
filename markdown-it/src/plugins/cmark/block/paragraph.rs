@@ -17,7 +17,7 @@ pub fn add(md: &mut MarkdownIt) {
 pub struct Paragraph;
 
 impl NodeValue for Paragraph {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
         fmt.cr();
         fmt.open("p", &node.attrs);
         fmt.contents(&node.children, options, cache);

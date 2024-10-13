@@ -33,6 +33,7 @@
 
 use std::collections::HashMap;
 
+use crate::parser::cache::Cache;
 use crate::{
     parser::{core::CoreRule, extset::MarkdownItExt, inline::builtin::InlineParserRule},
     plugins::{
@@ -112,7 +113,7 @@ impl NodeValue for HeadingAnchor {
         &self,
         node: &Node,
         fmt: &mut dyn crate::Renderer,
-        options: &HashMap<String, String>, cache: &mut HashMap<String, String>,
+        options: &HashMap<String, String>, cache: &mut Cache,
     ) {
         let mut attrs = node.attrs.clone();
         if let Some(id) = &self.id {

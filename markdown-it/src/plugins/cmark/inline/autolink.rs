@@ -17,7 +17,7 @@ pub struct Autolink {
 }
 
 impl NodeValue for Autolink {
-    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut HashMap<String, String>) {
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer, options: &HashMap<String, String>, cache: &mut Cache) {
         let mut attrs = node.attrs.clone();
         attrs.push(("href", self.url.clone()));
 
